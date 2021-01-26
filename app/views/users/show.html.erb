@@ -24,11 +24,11 @@
 
       <button type = "button">
       <% if @user.id == current_user.id %>
-          <%= link_to  edit_user_path(@user) do %>
+          <%= link_to edit_user_path(@user) do %>
           <i class="fas fa-user-cog"></i>
           <% end %>
       <% else %>
-          <%= link_to books_path do %>
+          <%= link_to edit_user_path(@user) do %>
           <i class="fas fa-user-cog"></i>
           <% end %>
       <% end %>
@@ -62,7 +62,7 @@
       <% end %>
 		</div>
 
-    <div class="col-md-9">
+    <div class="col-md-8 offset-md-1">
       <h2>Books</h2>
       <table class="table table-hover table-inverse">
 	    <thead>
@@ -76,13 +76,14 @@
 
 	    <tbody>
 	      <% @books.each do |book| %>
-		  <tr>
+		      <tr>
 
             <td>
             <%= link_to user_path(book.user.id) do %>
               <%= attachment_image_tag @user, :profile_image, size: "40x40", fallback: "no_image.jpeg" %>
             <% end %>
             </td>
+
             <td>
             <%= link_to book_path(book.id) do %>
               <%= book.title %>
